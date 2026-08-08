@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - Component Library & Design System</title>
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="background-color: var(--light-cream); padding: 2rem;">
+
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <!-- Header -->
+    <header style="margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 1.5rem;">
+      <div>
+        <h1 style="color: var(--dark-purple);">WorkNest Component Library</h1>
+        <p>Design System & UI Specs (Color tokens, buttons, forms, cards, tables, badges)</p>
+      </div>
+      <a href="index.html" class="btn btn--primary"><i class="fa-solid fa-arrow-left"></i> Go to Login Page</a>
+    </header>
+
+    <!-- 1. COLOR SWATCHES -->
+    <section class="card" style="margin-bottom: 2rem;">
+      <div class="card__header">
+        <h2 class="card__title"><i class="fa-solid fa-palette"></i> Brand Color Palette (Strict Hex Codes)</h2>
+      </div>
+      <div class="card__body">
+        <div class="grid grid-cols-4">
+          <div style="background-color: #341539; color: #FFF0C4; padding: 1.5rem; border-radius: var(--radius-md);">
+            <strong style="display: block; font-size: 1.125rem;">Dark Purple</strong>
+            <code>#341539</code>
+            <div style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.8;">Primary brand color: Sidebar bg, primary headers, primary buttons.</div>
+          </div>
+          <div style="background-color: #FFF0C4; color: #341539; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <strong style="display: block; font-size: 1.125rem;">Ivory</strong>
+            <code>#FFF0C4</code>
+            <div style="font-size: 0.75rem; margin-top: 0.5rem;">Accent / Highlight / CTA hover text, active badges, highlights.</div>
+          </div>
+          <div style="background-color: #F2E5D5; color: #341539; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <strong style="display: block; font-size: 1.125rem;">Light Cream</strong>
+            <code>#F2E5D5</code>
+            <div style="font-size: 0.75rem; margin-top: 0.5rem;">Main application page background.</div>
+          </div>
+          <div style="background-color: #D1B0C1; color: #341539; padding: 1.5rem; border-radius: var(--radius-md);">
+            <strong style="display: block; font-size: 1.125rem;">Soft Mauve</strong>
+            <code>#D1B0C1</code>
+            <div style="font-size: 0.75rem; margin-top: 0.5rem;">Secondary backgrounds, cards, hover states.</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1rem; background-color: #996A8C; color: #FFF0C4; padding: 1rem 1.5rem; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <strong>Muted Purple</strong> <code>#996A8C</code>
+            <span style="font-size: 0.8125rem; margin-left: 1rem; opacity: 0.9;">Secondary buttons, borders, subtext, icons.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. BUTTONS -->
+    <section class="card" style="margin-bottom: 2rem;">
+      <div class="card__header">
+        <h2 class="card__title"><i class="fa-solid fa-toggle-on"></i> Buttons & Interactions</h2>
+      </div>
+      <div class="card__body">
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+          <button class="btn btn--primary">Primary Button</button>
+          <button class="btn btn--secondary">Secondary Button</button>
+          <button class="btn btn--outline">Outline Button</button>
+          <button class="btn btn--danger">Danger Button</button>
+          <button class="btn btn--primary btn--disabled" disabled>Disabled State</button>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+          <button class="btn btn--primary btn--sm">Small Button</button>
+          <button class="btn btn--primary">Normal Button</button>
+          <button class="btn btn--primary btn--lg">Large Button</button>
+          <button class="btn btn--outline btn--icon" title="Settings"><i class="fa-solid fa-gear"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. BADGES & STATUS PILLS -->
+    <section class="card" style="margin-bottom: 2rem;">
+      <div class="card__header">
+        <h2 class="card__title"><i class="fa-solid fa-tag"></i> Status Badges & Pills</h2>
+      </div>
+      <div class="card__body" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <span class="badge badge--success"><span class="badge-dot"></span> Approved / Active</span>
+        <span class="badge badge--pending"><span class="badge-dot"></span> Pending Approval</span>
+        <span class="badge badge--danger"><span class="badge-dot"></span> Rejected / High Priority</span>
+        <span class="badge badge--info"><span class="badge-dot"></span> System Notice</span>
+      </div>
+    </section>
+
+    <!-- 4. FORMS & INPUTS -->
+    <section class="card" style="margin-bottom: 2rem;">
+      <div class="card__header">
+        <h2 class="card__title"><i class="fa-solid fa-pen-to-square"></i> Form Inputs & Validation States</h2>
+      </div>
+      <div class="card__body">
+        <div class="grid grid-cols-2">
+          <div class="form-group">
+            <label class="form-label">Normal Input</label>
+            <input type="text" class="form-control" placeholder="e.g. John Doe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Error State Input</label>
+            <input type="email" class="form-control form-control--error" value="invalid-email@">
+            <span class="form-hint form-hint--error">Please enter a valid work email address.</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Select Dropdown</label>
+            <select class="form-select">
+              <option>Engineering</option>
+              <option>Human Resources</option>
+              <option>Sales & Marketing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date Picker</label>
+            <input type="date" class="form-control" value="2026-08-12">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. STAT CARDS -->
+    <section style="margin-bottom: 2rem;">
+      <h2 style="margin-bottom: 1rem; color: var(--dark-purple);">Stat Cards</h2>
+      <div class="grid grid-cols-4">
+        <div class="card card--stat">
+          <div class="stat-content">
+            <div class="stat-label">Total Workforce</div>
+            <div class="stat-value">248</div>
+            <div class="stat-trend stat-trend--up"><i class="fa-solid fa-arrow-trend-up"></i> +12% this month</div>
+          </div>
+          <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+        </div>
+
+        <div class="card card--stat">
+          <div class="stat-content">
+            <div class="stat-label">Active Attendance</div>
+            <div class="stat-value">96.4%</div>
+            <div class="stat-trend stat-trend--up"><i class="fa-solid fa-arrow-trend-up"></i> +2.1%</div>
+          </div>
+          <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
+        </div>
+
+        <div class="card card--stat">
+          <div class="stat-content">
+            <div class="stat-label">Pending Requests</div>
+            <div class="stat-value">14</div>
+            <div class="stat-trend stat-trend--down"><i class="fa-solid fa-clock"></i> 6 Urgent</div>
+          </div>
+          <div class="stat-icon"><i class="fa-solid fa-file-signature"></i></div>
+        </div>
+
+        <div class="card card--stat">
+          <div class="stat-content">
+            <div class="stat-label">Support Tickets</div>
+            <div class="stat-value">3 Open</div>
+            <div class="stat-trend stat-trend--up"><i class="fa-solid fa-check-double"></i> 94% Resolved</div>
+          </div>
+          <div class="stat-icon"><i class="fa-solid fa-headset"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TABLE STYLE -->
+    <section class="card" style="margin-bottom: 2rem;">
+      <div class="card__header">
+        <h2 class="card__title"><i class="fa-solid fa-table"></i> Data Table Design</h2>
+      </div>
+      <div class="card__body" style="padding: 0;">
+        <div class="table-responsive">
+          <table class="table table--striped table--hover">
+            <thead>
+              <tr>
+                <th>Employee Name</th>
+                <th>Role / Dept</th>
+                <th>Status</th>
+                <th>Joining Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap: 0.75rem;">
+                    <div class="avatar avatar--sm">AW</div>
+                    <div>
+                      <strong>Alexander Wright</strong>
+                      <div style="font-size: 0.75rem; color: var(--text-muted);">alex@worknest.io</div>
+                    </div>
+                  </div>
+                </td>
+                <td>System Administrator</td>
+                <td><span class="badge badge--success">Active</span></td>
+                <td>Jan 15, 2024</td>
+                <td>
+                  <button class="btn btn--outline btn--sm"><i class="fa-solid fa-pen"></i> Edit</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display:flex; align-items:center; gap: 0.75rem;">
+                    <div class="avatar avatar--sm">SL</div>
+                    <div>
+                      <strong>Sarah Lindqvist</strong>
+                      <div style="font-size: 0.75rem; color: var(--text-muted);">sarah@worknest.io</div>
+                    </div>
+                  </div>
+                </td>
+                <td>HR Lead</td>
+                <td><span class="badge badge--success">Active</span></td>
+                <td>Mar 01, 2024</td>
+                <td>
+                  <button class="btn btn--outline btn--sm"><i class="fa-solid fa-pen"></i> Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

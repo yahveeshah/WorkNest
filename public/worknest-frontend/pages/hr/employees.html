@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - Employee Directory</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">WN</div>
+        <div>
+          <h1 class="sidebar__title">WorkNest</h1>
+          <span class="sidebar__role-pill">HR Console</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-title">Human Resources</div>
+        <a href="dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-users-view-finder"></i> HR Overview
+        </a>
+        <a href="employees.html" class="sidebar__link is-active">
+          <i class="fa-solid fa-address-book"></i> Employee Directory
+        </a>
+        <a href="../manager/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-user-group"></i> Manager Portal
+        </a>
+        <a href="../employee/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-house-user"></i> Employee Portal
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+            <input type="text" class="search-box__input" placeholder="Search employees by name, role, email...">
+          </div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="role-switcher">
+            <span class="role-switcher__label">Role:</span>
+            <select id="roleSelect" class="role-switcher__select">
+              <option value="admin">Admin</option>
+              <option value="ceo">CEO</option>
+              <option value="hr" selected>HR</option>
+              <option value="manager">Manager</option>
+              <option value="employee">Employee</option>
+              <option value="support">Support</option>
+            </select>
+          </div>
+
+          <div class="user-dropdown dropdown">
+            <button class="user-btn dropdown-toggle">
+              <div class="avatar"><span>SL</span></div>
+              <div class="user-info">
+                <div class="user-name">Sarah Lindqvist</div>
+                <div class="user-role">Head of People & HR</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>Workforce Directory</h1>
+            <p>Complete records, organizational roles, and contact details for all 248 staff members.</p>
+          </div>
+          <div class="page-header__actions">
+            <button class="btn btn--primary" data-modal-target="addEmployeeModal"><i class="fa-solid fa-user-plus"></i> Add Employee</button>
+          </div>
+        </div>
+
+        <!-- Directory Table -->
+        <div class="card">
+          <div class="card__header">
+            <div style="display:flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button class="btn btn--primary btn--sm">All Staff (248)</button>
+              <button class="btn btn--outline btn--sm">Engineering (94)</button>
+              <button class="btn btn--outline btn--sm">Product & Design (32)</button>
+              <button class="btn btn--outline btn--sm">Sales & Marketing (48)</button>
+              <button class="btn btn--outline btn--sm">HR & Admin (18)</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table--striped table--hover">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Job Title</th>
+                  <th>Department</th>
+                  <th>Joining Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap: 0.75rem;">
+                      <div class="avatar avatar--sm">AW</div>
+                      <div>
+                        <strong>Alexander Wright</strong>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">alexander@worknest.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Lead Infrastructure Engineer</td>
+                  <td>IT & Systems</td>
+                  <td>Jan 15, 2024</td>
+                  <td><span class="badge badge--success">Active</span></td>
+                  <td>
+                    <button class="btn btn--outline btn--sm" data-modal-target="viewProfileModal"><i class="fa-solid fa-eye"></i> View Profile</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap: 0.75rem;">
+                      <div class="avatar avatar--sm">SL</div>
+                      <div>
+                        <strong>Sarah Lindqvist</strong>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">sarah.l@worknest.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Head of HR Operations</td>
+                  <td>Human Resources</td>
+                  <td>Mar 01, 2024</td>
+                  <td><span class="badge badge--success">Active</span></td>
+                  <td>
+                    <button class="btn btn--outline btn--sm" data-modal-target="viewProfileModal"><i class="fa-solid fa-eye"></i> View Profile</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap: 0.75rem;">
+                      <div class="avatar avatar--sm">DK</div>
+                      <div>
+                        <strong>David Kim</strong>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">david.k@worknest.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Senior Frontend Engineer</td>
+                  <td>Engineering</td>
+                  <td>Nov 10, 2024</td>
+                  <td><span class="badge badge--pending">On Leave</span></td>
+                  <td>
+                    <button class="btn btn--outline btn--sm" data-modal-target="viewProfileModal"><i class="fa-solid fa-eye"></i> View Profile</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <div style="display:flex; align-items:center; gap: 0.75rem;">
+                      <div class="avatar avatar--sm">MC</div>
+                      <div>
+                        <strong>Maria Chen</strong>
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">maria.c@worknest.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Principal UX Strategist</td>
+                  <td>Product & Design</td>
+                  <td>Feb 20, 2025</td>
+                  <td><span class="badge badge--success">Active</span></td>
+                  <td>
+                    <button class="btn btn--outline btn--sm" data-modal-target="viewProfileModal"><i class="fa-solid fa-eye"></i> View Profile</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        WorkNest Employee Directory &copy; 2026.
+      </footer>
+    </div>
+  </div>
+
+  <!-- Employee Detail Modal -->
+  <div class="modal-backdrop" id="viewProfileModal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="card__title">Employee Profile Details</h3>
+        <button class="modal__close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal__body">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <div class="avatar avatar--lg" style="margin: 0 auto 0.75rem;">AW</div>
+          <h2 style="font-size: 1.25rem;">Alexander Wright</h2>
+          <div style="color: var(--text-muted); font-size: 0.875rem;">Lead Infrastructure Engineer &bull; IT & Systems</div>
+          <span class="badge badge--success" style="margin-top: 0.5rem;">Active &bull; Full-Time</span>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; display:flex; flex-direction:column; gap: 0.75rem; font-size: 0.875rem;">
+          <div><strong>Email:</strong> alexander@worknest.io</div>
+          <div><strong>Phone:</strong> +1 (555) 234-5678</div>
+          <div><strong>Location:</strong> New York HQ (Hybrid)</div>
+          <div><strong>Joined Date:</strong> January 15, 2024</div>
+          <div><strong>Reporting Manager:</strong> Elena Rostova (CEO)</div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--outline" data-modal-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

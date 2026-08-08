@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - Page Not Found (404)</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #341539 0%, #200C24 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      color: var(--ivory);
+    }
+    .error-card {
+      text-align: center;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(209, 176, 193, 0.2);
+      padding: 3rem 2rem;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="error-card">
+    <div style="font-size: 5rem; font-weight: 800; color: var(--ivory); line-height: 1; margin-bottom: 1rem;">
+      404
+    </div>
+    <h1 style="color: var(--ivory); font-size: 1.75rem; margin-bottom: 0.5rem;">Page Not Found</h1>
+    <p style="color: var(--soft-mauve); margin-bottom: 2rem;">
+      The requested route or document could not be located in the WorkNest management portal.
+    </p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="../admin/dashboard.html" class="btn btn--primary btn--lg">
+        <i class="fa-solid fa-house"></i> Return to Dashboard
+      </a>
+      <a href="../../index.html" class="btn btn--outline btn--lg" style="color: var(--ivory); border-color: var(--soft-mauve);">
+        <i class="fa-solid fa-right-to-bracket"></i> Sign In Page
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - Support Desk</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">WN</div>
+        <div>
+          <h1 class="sidebar__title">WorkNest</h1>
+          <span class="sidebar__role-pill">Support Portal</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-title">Technical Support</div>
+        <a href="dashboard.html" class="sidebar__link is-active">
+          <i class="fa-solid fa-headset"></i> Ticket Queue & Desk
+        </a>
+        <a href="../admin/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-user-shield"></i> Admin Panel
+        </a>
+        <a href="../employee/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-house-user"></i> Employee Portal
+        </a>
+
+        <div class="sidebar__section-title" style="margin-top: 1rem;">System & Utils</div>
+        <a href="../shared/profile.html" class="sidebar__link">
+          <i class="fa-solid fa-user-gear"></i> Account Profile
+        </a>
+        <a href="../../components-guide.html" class="sidebar__link">
+          <i class="fa-solid fa-swatchbook"></i> Style Guide
+        </a>
+        <a href="../../index.html" class="sidebar__link" style="color: var(--ivory);">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+            <input type="text" class="search-box__input" placeholder="Search ticket ID, user, issue topic...">
+          </div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="role-switcher">
+            <span class="role-switcher__label">Role:</span>
+            <select id="roleSelect" class="role-switcher__select">
+              <option value="admin">Admin</option>
+              <option value="ceo">CEO</option>
+              <option value="hr">HR</option>
+              <option value="manager">Manager</option>
+              <option value="employee">Employee</option>
+              <option value="support" selected>Support</option>
+            </select>
+          </div>
+
+          <div class="user-dropdown dropdown">
+            <button class="user-btn dropdown-toggle">
+              <div class="avatar"><span>ST</span></div>
+              <div class="user-info">
+                <div class="user-name">Support Team</div>
+                <div class="user-role">Helpdesk Engineer</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>Support Ticketing & Resolution Desk</h1>
+            <p>Track technical queries, resolve employee issues, and update system tickets.</p>
+          </div>
+          <div class="page-header__actions">
+            <button class="btn btn--primary" data-modal-target="raiseTicketModal"><i class="fa-solid fa-plus-circle"></i> Raise New Ticket</button>
+          </div>
+        </div>
+
+        <!-- Ticket Stats Grid -->
+        <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Open Tickets</div>
+              <div class="stat-value">3 Tickets</div>
+              <div class="stat-trend stat-trend--down" style="color: var(--status-pending-text);"><i class="fa-solid fa-hourglass-half"></i> 1 High Priority</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-ticket"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Avg Resolution Time</div>
+              <div class="stat-value">1.4 Hours</div>
+              <div class="stat-trend stat-trend--up"><i class="fa-solid fa-bolt"></i> Fast resolution rate</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Resolved This Week</div>
+              <div class="stat-value">42 Tickets</div>
+              <div class="stat-trend stat-trend--up"><i class="fa-solid fa-check-double"></i> 98.4% CSAT</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Knowledge Base</div>
+              <div class="stat-value">28 Articles</div>
+              <div class="stat-trend stat-trend--up">Self-service ready</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-book"></i></div>
+          </div>
+        </div>
+
+        <!-- Ticket Queue & Resolution Drawer Grid -->
+        <div class="grid grid-cols-3" style="margin-bottom: 2rem;">
+          
+          <!-- Ticket Queue Table (Span 2) -->
+          <div class="card" style="grid-column: span 2;">
+            <div class="card__header">
+              <h2 class="card__title"><i class="fa-solid fa-list-check"></i> Active Support Ticket Queue</h2>
+              <span class="badge badge--info">Real-time Feed</span>
+            </div>
+            <div class="table-responsive">
+              <table class="table table--hover">
+                <thead>
+                  <tr>
+                    <th>Ticket ID</th>
+                    <th>Subject</th>
+                    <th>Submitted By</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>#TK-8042</strong></td>
+                    <td>VPN Connection dropping during remote shift</td>
+                    <td>David Kim</td>
+                    <td><span class="badge badge--danger">High</span></td>
+                    <td><span class="badge badge--pending">In Progress</span></td>
+                    <td>
+                      <button class="btn btn--outline btn--sm" data-modal-target="viewTicketModal"><i class="fa-solid fa-comments"></i> Resolve</button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>#TK-8041</strong></td>
+                    <td>Request for extra Monitor at NYC Desk</td>
+                    <td>Maria Chen</td>
+                    <td><span class="badge badge--info">Normal</span></td>
+                    <td><span class="badge badge--pending">Open</span></td>
+                    <td>
+                      <button class="btn btn--outline btn--sm" data-modal-target="viewTicketModal"><i class="fa-solid fa-comments"></i> Resolve</button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>#TK-8039</strong></td>
+                    <td>Password reset requirement for staging database</td>
+                    <td>James Taylor</td>
+                    <td><span class="badge badge--info">Normal</span></td>
+                    <td><span class="badge badge--success">Resolved</span></td>
+                    <td>
+                      <button class="btn btn--outline btn--sm" data-modal-target="viewTicketModal"><i class="fa-solid fa-eye"></i> View</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Knowledge Base & Quick Links -->
+          <div class="card">
+            <div class="card__header">
+              <h2 class="card__title"><i class="fa-solid fa-lightbulb"></i> FAQ & KB Quick Links</h2>
+            </div>
+            <div class="card__body" style="display:flex; flex-direction:column; gap: 0.875rem;">
+              <a href="#" class="card" style="padding: 0.875rem; text-decoration: none; border-color: var(--border-color);">
+                <strong style="color: var(--dark-purple); font-size: 0.875rem; display:block;">How to reset corporate email 2FA?</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Step-by-step authenticator key guide</span>
+              </a>
+
+              <a href="#" class="card" style="padding: 0.875rem; text-decoration: none; border-color: var(--border-color);">
+                <strong style="color: var(--dark-purple); font-size: 0.875rem; display:block;">Setting up OpenVPN client on macOS</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Network security & profile download</span>
+              </a>
+
+              <a href="#" class="card" style="padding: 0.875rem; text-decoration: none; border-color: var(--border-color);">
+                <strong style="color: var(--dark-purple); font-size: 0.875rem; display:block;">WorkNest Mobile App pairing</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">QR code device provisioning</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+
+      <footer class="footer">
+        WorkNest Technical Helpdesk &copy; 2026.
+      </footer>
+    </div>
+  </div>
+
+  <!-- Raise Ticket Modal -->
+  <div class="modal-backdrop" id="raiseTicketModal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="card__title">Raise Technical Support Ticket</h3>
+        <button class="modal__close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal__body">
+        <form id="raiseTicketForm" data-validate>
+          <div class="form-group">
+            <label class="form-label">Issue Subject</label>
+            <input type="text" class="form-control" placeholder="Brief summary of technical issue..." required>
+          </div>
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select" required>
+                <option>Hardware & Equipment</option>
+                <option>Network & VPN</option>
+                <option>WorkNest Software Bug</option>
+                <option>Account Credentials</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Priority</label>
+              <select class="form-select">
+                <option>Low</option>
+                <option selected>Normal</option>
+                <option>High / Urgent</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Detailed Description</label>
+            <textarea class="form-control" rows="3" placeholder="Provide steps to reproduce or details..." required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--outline" data-modal-close>Cancel</button>
+        <button class="btn btn--primary" onclick="showToast('Support ticket #TK-8043 created successfully!', 'success'); document.getElementById('raiseTicketModal').classList.remove('is-active');">Submit Ticket</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Ticket Chat Resolution Drawer Modal -->
+  <div class="modal-backdrop" id="viewTicketModal">
+    <div class="modal" style="max-width: 580px;">
+      <div class="modal__header">
+        <div>
+          <h3 class="card__title">Ticket #TK-8042 Thread</h3>
+          <div style="font-size: 0.75rem; color: var(--text-muted);">VPN Connection dropping during remote shift</div>
+        </div>
+        <button class="modal__close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal__body" style="display:flex; flex-direction:column; gap: 1rem; background-color: rgba(52,21,57,0.02);">
+        <div style="align-self: flex-start; max-width: 80%; background-color: #FFFFFF; padding: 0.875rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <strong style="font-size: 0.75rem; color: var(--dark-purple);">David Kim (Submitted) &bull; Today 10:15 AM</strong>
+          <p style="font-size: 0.875rem; margin-top: 0.25rem;">My OpenVPN disconnects every 15 minutes while accessing staging server.</p>
+        </div>
+
+        <div style="align-self: flex-end; max-width: 80%; background-color: var(--dark-purple); color: var(--ivory); padding: 0.875rem; border-radius: var(--radius-md);">
+          <strong style="font-size: 0.75rem; color: var(--ivory);">Helpdesk Support &bull; Today 11:30 AM</strong>
+          <p style="font-size: 0.875rem; margin-top: 0.25rem;">Hi David! We flushed your active VPN lease. Please restart your OpenVPN client and reconnect.</p>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--primary" onclick="showToast('Ticket marked as Resolved.', 'success'); document.getElementById('viewTicketModal').classList.remove('is-active');"><i class="fa-solid fa-check"></i> Mark Resolved</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

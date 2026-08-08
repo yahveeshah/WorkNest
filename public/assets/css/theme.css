@@ -1,0 +1,124 @@
+/* WorkNest - Theme & Global Variables */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Color Palette */
+  --dark-purple: #341539;   /* primary brand color - sidebar bg, headers, primary buttons */
+  --ivory: #FFF0C4;         /* accent / highlight / CTA hover, badges */
+  --light-cream: #F2E5D5;   /* main page background */
+  --soft-mauve: #D1B0C1;    /* secondary backgrounds, cards, hover states */
+  --muted-purple: #996A8C;  /* secondary buttons, borders, subtext, icons */
+
+  /* Derived Palette Elements */
+  --dark-purple-rgb: 52, 21, 57;
+  --soft-mauve-rgb: 209, 176, 193;
+  --muted-purple-rgb: 153, 106, 140;
+  --ivory-rgb: 255, 240, 196;
+
+  /* Typography & Neutral Colors */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --text-dark: #231627;
+  --text-muted: #6B5267;
+  --text-light: #F2E5D5;
+  --card-bg: #FFFFFF;
+  --border-color: rgba(153, 106, 140, 0.25);
+  
+  /* Status colors */
+  --status-success-bg: rgba(39, 93, 56, 0.1);
+  --status-success-text: #205432;
+  --status-success-border: rgba(39, 93, 56, 0.25);
+
+  --status-pending-bg: var(--ivory);
+  --status-pending-text: #664A00;
+  --status-pending-border: #E6CC7A;
+
+  --status-danger-bg: rgba(122, 28, 48, 0.1);
+  --status-danger-text: #7A1C30;
+  --status-danger-border: rgba(122, 28, 48, 0.25);
+
+  --status-info-bg: rgba(52, 21, 57, 0.08);
+  --status-info-text: var(--dark-purple);
+  --status-info-border: rgba(52, 21, 57, 0.2);
+
+  /* Elevation / Shadows */
+  --shadow-sm: 0 2px 4px rgba(52, 21, 57, 0.04);
+  --shadow-md: 0 4px 12px rgba(52, 21, 57, 0.08);
+  --shadow-lg: 0 12px 28px rgba(52, 21, 57, 0.12);
+  --shadow-inner: inset 0 2px 4px rgba(52, 21, 57, 0.06);
+
+  /* Transitions & Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--light-cream);
+  color: var(--text-dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-purple);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.875rem; letter-spacing: -0.02em; }
+h2 { font-size: 1.5rem; letter-spacing: -0.015em; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+p {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+a {
+  color: var(--dark-purple);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--muted-purple);
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--light-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--soft-mauve);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-purple);
+}

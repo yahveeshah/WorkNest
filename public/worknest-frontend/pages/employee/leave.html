@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - Apply for Leave</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">WN</div>
+        <div>
+          <h1 class="sidebar__title">WorkNest</h1>
+          <span class="sidebar__role-pill">Employee Portal</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-title">My Workspace</div>
+        <a href="dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-house-user"></i> My Dashboard
+        </a>
+        <a href="attendance.html" class="sidebar__link">
+          <i class="fa-solid fa-clock"></i> Attendance Log
+        </a>
+        <a href="leave.html" class="sidebar__link is-active">
+          <i class="fa-solid fa-calendar-minus"></i> Apply Leave
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+            <input type="text" class="search-box__input" placeholder="Search leave records...">
+          </div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="role-switcher">
+            <span class="role-switcher__label">Role:</span>
+            <select id="roleSelect" class="role-switcher__select">
+              <option value="admin">Admin</option>
+              <option value="ceo">CEO</option>
+              <option value="hr">HR</option>
+              <option value="manager">Manager</option>
+              <option value="employee" selected>Employee</option>
+              <option value="support">Support</option>
+            </select>
+          </div>
+
+          <div class="user-dropdown dropdown">
+            <button class="user-btn dropdown-toggle">
+              <div class="avatar"><span>DK</span></div>
+              <div class="user-info">
+                <div class="user-name">David Kim</div>
+                <div class="user-role">Senior Frontend Dev</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>Leave Application & Balance</h1>
+            <p>Submit time-off requests to your manager and HR team, and track application status.</p>
+          </div>
+        </div>
+
+        <!-- Leave Balances -->
+        <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Annual Leave</div>
+              <div class="stat-value">12 Days</div>
+              <div class="stat-trend stat-trend--up">Available for use</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-plane"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Sick Leave</div>
+              <div class="stat-value">6 Days</div>
+              <div class="stat-trend stat-trend--up">Available for use</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-notes-medical"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Casual Leave</div>
+              <div class="stat-value">3 Days</div>
+              <div class="stat-trend stat-trend--up">Available for use</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-mug-hot"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Used This Year</div>
+              <div class="stat-value">4 Days</div>
+              <div class="stat-trend stat-trend--up">Approved time off</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3" style="margin-bottom: 2rem;">
+          <!-- Apply for Leave Form -->
+          <div class="card" style="grid-column: span 1;">
+            <div class="card__header">
+              <h2 class="card__title"><i class="fa-solid fa-paper-plane"></i> New Leave Request</h2>
+            </div>
+            <div class="card__body">
+              <form id="applyLeaveForm" data-validate>
+                <div class="form-group">
+                  <label class="form-label">Leave Type</label>
+                  <select class="form-select" required>
+                    <option>Annual Leave</option>
+                    <option>Sick Leave</option>
+                    <option>Casual Leave</option>
+                    <option>Unpaid Leave</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Start Date</label>
+                  <input type="date" class="form-control" value="2026-08-14" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">End Date</label>
+                  <input type="date" class="form-control" value="2026-08-18" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Reason for Request</label>
+                  <textarea class="form-control" rows="3" placeholder="Brief explanation of your leave request..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">
+                  Submit Leave Request
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Leave History Table (Span 2) -->
+          <div class="card" style="grid-column: span 2;">
+            <div class="card__header">
+              <h2 class="card__title"><i class="fa-solid fa-clock-rotate-left"></i> My Leave Request History</h2>
+            </div>
+            <div class="table-responsive">
+              <table class="table table--striped table--hover">
+                <thead>
+                  <tr>
+                    <th>Leave Type</th>
+                    <th>Date Range</th>
+                    <th>Days</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Annual Leave</strong></td>
+                    <td>Aug 14, 2026 – Aug 18, 2026</td>
+                    <td>5 Days</td>
+                    <td><span class="badge badge--pending">Pending Manager Approval</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sick Leave</strong></td>
+                    <td>Jul 02, 2026</td>
+                    <td>1 Day</td>
+                    <td><span class="badge badge--success">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Casual Leave</strong></td>
+                    <td>May 12, 2026 – May 13, 2026</td>
+                    <td>2 Days</td>
+                    <td><span class="badge badge--success">Approved</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Annual Leave</strong></td>
+                    <td>Jan 02, 2026</td>
+                    <td>1 Day</td>
+                    <td><span class="badge badge--danger">Rejected (Peak Sprint)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <footer class="footer">
+        WorkNest Leave Management System &copy; 2026.
+      </footer>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    document.getElementById('applyLeaveForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Leave request submitted to Marcus Vance for approval.', 'success');
+    });
+  </script>
+</body>
+</html>
