@@ -1,0 +1,72 @@
+<!-- WorkNest Reusable Navbar Partial (Laravel Blade ready: @include('components.navbar')) -->
+<header class="topbar">
+  <div class="topbar__left">
+    <button class="topbar__toggle" id="sidebarToggle" aria-label="Toggle navigation">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+      <input type="text" class="search-box__input" placeholder="Search employees, tasks, tickets...">
+    </div>
+  </div>
+
+  <div class="topbar__right">
+    <!-- Interactive Role Switcher for instant demo transitions -->
+    <div class="role-switcher">
+      <span class="role-switcher__label">Role:</span>
+      <select id="roleSelect" class="role-switcher__select">
+        <option value="admin">Admin</option>
+        <option value="ceo">CEO</option>
+        <option value="hr">HR</option>
+        <option value="manager">Manager</option>
+        <option value="employee">Employee</option>
+        <option value="support">Support Desk</option>
+      </select>
+    </div>
+
+    <!-- Notification Bell -->
+    <div class="dropdown">
+      <button class="btn btn--outline btn--icon dropdown-toggle" aria-label="Notifications" style="border: none; position: relative;">
+        <i class="fa-regular fa-bell" style="font-size: 1.125rem; color: var(--dark-purple);"></i>
+        <span style="position: absolute; top: 2px; right: 2px; width: 8px; height: 8px; background-color: var(--status-danger-text); border-radius: 50%;"></span>
+      </button>
+      <div class="dropdown-menu" style="position: absolute; right: 0; top: 120%; width: 300px; background: #FFF; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: 1rem; display: none; z-index: 1000; border: 1px solid var(--border-color);">
+        <div style="display:flex; justify-between; align-items:center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+          <strong style="color: var(--dark-purple); font-size: 0.875rem;">Notifications</strong>
+          <span class="badge badge--info" style="font-size: 0.7rem;">3 New</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap: 0.75rem; font-size: 0.8125rem;">
+          <div style="display:flex; gap: 0.5rem;">
+            <i class="fa-solid fa-calendar-check" style="color: var(--muted-purple); margin-top: 2px;"></i>
+            <div>
+              <strong>Leave Request Approved</strong>
+              <div style="color: var(--text-muted); font-size: 0.75rem;">Your sick leave for Aug 12 was approved.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap: 0.5rem;">
+            <i class="fa-solid fa-tasks" style="color: var(--muted-purple); margin-top: 2px;"></i>
+            <div>
+              <strong>New Task Assigned</strong>
+              <div style="color: var(--text-muted); font-size: 0.75rem;">Q3 Financial Audit report assigned by CEO.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Profile Dropdown -->
+    <div class="user-dropdown dropdown">
+      <button class="user-btn dropdown-toggle">
+        <div class="avatar">
+          <span>WN</span>
+        </div>
+        <div class="user-info">
+          <div class="user-name">Alexander Wright</div>
+          <div class="user-role" id="topbarRoleLabel">System Administrator</div>
+        </div>
+        <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--muted-purple);"></i>
+      </button>
+    </div>
+  </div>
+</header>

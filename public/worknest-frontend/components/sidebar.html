@@ -1,0 +1,73 @@
+<!-- WorkNest Reusable Sidebar Partial (Laravel Blade ready: @include('components.sidebar')) -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar__brand">
+    <div class="sidebar__logo">WN</div>
+    <div>
+      <h1 class="sidebar__title">WorkNest</h1>
+      <span class="sidebar__role-pill" id="sidebarRoleTag">Admin Mode</span>
+    </div>
+  </div>
+
+  <nav class="sidebar__nav">
+    <div class="sidebar__section-title">Main Navigation</div>
+
+    <!-- Admin Nav -->
+    <a href="../admin/dashboard.html" class="sidebar__link nav-role-admin">
+      <i class="fa-solid fa-chart-pie"></i> Admin Console
+    </a>
+
+    <!-- CEO Nav -->
+    <a href="../ceo/dashboard.html" class="sidebar__link nav-role-ceo">
+      <i class="fa-solid fa-chart-line"></i> Executive Analytics
+    </a>
+
+    <!-- HR Nav -->
+    <a href="../hr/dashboard.html" class="sidebar__link nav-role-hr">
+      <i class="fa-solid fa-users"></i> HR Dashboard
+    </a>
+    <a href="../hr/employees.html" class="sidebar__link nav-role-hr">
+      <i class="fa-solid fa-id-card"></i> Employee Directory
+    </a>
+
+    <!-- Manager Nav -->
+    <a href="../manager/dashboard.html" class="sidebar__link nav-role-manager">
+      <i class="fa-solid fa-user-group"></i> My Team Overview
+    </a>
+    <a href="../manager/tasks.html" class="sidebar__link nav-role-manager">
+      <i class="fa-solid fa-list-check"></i> Task Board
+    </a>
+
+    <!-- Employee Nav -->
+    <a href="../employee/dashboard.html" class="sidebar__link nav-role-employee">
+      <i class="fa-solid fa-house-user"></i> My Dashboard
+    </a>
+    <a href="../employee/attendance.html" class="sidebar__link nav-role-employee">
+      <i class="fa-solid fa-clock"></i> Attendance Log
+    </a>
+    <a href="../employee/leave.html" class="sidebar__link nav-role-employee">
+      <i class="fa-solid fa-calendar-minus"></i> Apply Leave
+    </a>
+
+    <!-- Support Nav -->
+    <a href="../support/dashboard.html" class="sidebar__link nav-role-support">
+      <i class="fa-solid fa-headset"></i> Support Desk
+    </a>
+
+    <div class="sidebar__section-title" style="margin-top: 1rem;">System & Utils</div>
+    <a href="../shared/profile.html" class="sidebar__link">
+      <i class="fa-solid fa-user-gear"></i> Account Settings
+    </a>
+    <a href="../../components-guide.html" class="sidebar__link">
+      <i class="fa-solid fa-swatchbook"></i> Style Guide
+    </a>
+    <a href="../../index.html" class="sidebar__link" style="color: var(--ivory);">
+      <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+    </a>
+  </nav>
+
+  <div class="sidebar__footer">
+    <div style="font-size: 0.75rem; color: var(--soft-mauve); text-align: center;">
+      WorkNest v2.4.0 &bull; Enterprise
+    </div>
+  </div>
+</aside>

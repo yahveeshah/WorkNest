@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - My Attendance Log</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">WN</div>
+        <div>
+          <h1 class="sidebar__title">WorkNest</h1>
+          <span class="sidebar__role-pill">Employee Portal</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-title">My Workspace</div>
+        <a href="dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-house-user"></i> My Dashboard
+        </a>
+        <a href="attendance.html" class="sidebar__link is-active">
+          <i class="fa-solid fa-clock"></i> Attendance Log
+        </a>
+        <a href="leave.html" class="sidebar__link">
+          <i class="fa-solid fa-calendar-minus"></i> Apply Leave
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+            <input type="text" class="search-box__input" placeholder="Search attendance dates...">
+          </div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="role-switcher">
+            <span class="role-switcher__label">Role:</span>
+            <select id="roleSelect" class="role-switcher__select">
+              <option value="admin">Admin</option>
+              <option value="ceo">CEO</option>
+              <option value="hr">HR</option>
+              <option value="manager">Manager</option>
+              <option value="employee" selected>Employee</option>
+              <option value="support">Support</option>
+            </select>
+          </div>
+
+          <div class="user-dropdown dropdown">
+            <button class="user-btn dropdown-toggle">
+              <div class="avatar"><span>DK</span></div>
+              <div class="user-info">
+                <div class="user-name">David Kim</div>
+                <div class="user-role">Senior Frontend Dev</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>Attendance History & Hours Log</h1>
+            <p>Detailed log of daily check-in times, check-out times, and total shift durations.</p>
+          </div>
+        </div>
+
+        <!-- Monthly Summary Stats -->
+        <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Days Present</div>
+              <div class="stat-value">6 / 6 Days</div>
+              <div class="stat-trend stat-trend--up">100% Attendance rate</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Total Hours Worked</div>
+              <div class="stat-value">49.5 hrs</div>
+              <div class="stat-trend stat-trend--up">Avg 8.25 hrs/day</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-stopwatch"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">On-Time Arrival</div>
+              <div class="stat-value">100%</div>
+              <div class="stat-trend stat-trend--up">Punctual arrival record</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-user-clock"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Overtime Hours</div>
+              <div class="stat-value">3.2 hrs</div>
+              <div class="stat-trend stat-trend--up">Approved for payout</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-bolt"></i></div>
+          </div>
+        </div>
+
+        <!-- Attendance Log Table -->
+        <div class="card">
+          <div class="card__header">
+            <h2 class="card__title"><i class="fa-solid fa-table-list"></i> August 2026 Shift Log</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="table table--striped table--hover">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Check In Time</th>
+                  <th>Check Out Time</th>
+                  <th>Total Duration</th>
+                  <th>Shift Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Fri, Aug 08, 2026</strong></td>
+                  <td>08:50 AM</td>
+                  <td>Active (Working)</td>
+                  <td>7 hrs 42 mins</td>
+                  <td><span class="badge badge--success">On Time &bull; Active</span></td>
+                </tr>
+                <tr>
+                  <td>Thu, Aug 07, 2026</td>
+                  <td>08:55 AM</td>
+                  <td>05:30 PM</td>
+                  <td>8 hrs 35 mins</td>
+                  <td><span class="badge badge--success">On Time</span></td>
+                </tr>
+                <tr>
+                  <td>Wed, Aug 06, 2026</td>
+                  <td>08:48 AM</td>
+                  <td>05:25 PM</td>
+                  <td>8 hrs 37 mins</td>
+                  <td><span class="badge badge--success">On Time</span></td>
+                </tr>
+                <tr>
+                  <td>Tue, Aug 05, 2026</td>
+                  <td>08:52 AM</td>
+                  <td>05:45 PM</td>
+                  <td>8 hrs 53 mins</td>
+                  <td><span class="badge badge--success">On Time (OT +30m)</span></td>
+                </tr>
+                <tr>
+                  <td>Mon, Aug 04, 2026</td>
+                  <td>09:00 AM</td>
+                  <td>05:30 PM</td>
+                  <td>8 hrs 30 mins</td>
+                  <td><span class="badge badge--success">On Time</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        WorkNest Attendance Log &copy; 2026.
+      </footer>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>
