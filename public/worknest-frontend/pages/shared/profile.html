@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - Account Profile & Settings</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">WN</div>
+        <div>
+          <h1 class="sidebar__title">WorkNest</h1>
+          <span class="sidebar__role-pill">User Settings</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-title">Navigation</div>
+        <a href="../admin/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-chart-pie"></i> Dashboards
+        </a>
+        <a href="profile.html" class="sidebar__link is-active">
+          <i class="fa-solid fa-user-gear"></i> Account Profile
+        </a>
+        <a href="../../components-guide.html" class="sidebar__link">
+          <i class="fa-solid fa-swatchbook"></i> Style Guide
+        </a>
+        <a href="../../index.html" class="sidebar__link" style="color: var(--ivory);">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+            <input type="text" class="search-box__input" placeholder="Search account settings...">
+          </div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="role-switcher">
+            <span class="role-switcher__label">Role:</span>
+            <select id="roleSelect" class="role-switcher__select">
+              <option value="admin">Admin</option>
+              <option value="ceo">CEO</option>
+              <option value="hr">HR</option>
+              <option value="manager">Manager</option>
+              <option value="employee">Employee</option>
+              <option value="support">Support</option>
+            </select>
+          </div>
+
+          <div class="user-dropdown dropdown">
+            <button class="user-btn dropdown-toggle">
+              <div class="avatar"><span>AW</span></div>
+              <div class="user-info">
+                <div class="user-name">Alexander Wright</div>
+                <div class="user-role">System Administrator</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>My Profile & Preferences</h1>
+            <p>Manage your account credentials, security settings, and notification alerts.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3">
+          <!-- Profile Card -->
+          <div class="card" style="text-align: center; height: fit-content;">
+            <div class="card__body">
+              <div class="avatar avatar--lg" style="margin: 0 auto 1rem;">AW</div>
+              <h2 style="font-size: 1.25rem;">Alexander Wright</h2>
+              <p style="font-size: 0.8125rem;">System Administrator</p>
+              <span class="badge badge--info" style="margin-top: 0.5rem;">IT Infrastructure</span>
+
+              <div style="margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                <button class="btn btn--outline btn--sm w-full" style="width: 100%;"><i class="fa-solid fa-camera"></i> Change Avatar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Edit Profile & Security Details (Span 2) -->
+          <div style="grid-column: span 2; display:flex; flex-direction:column; gap: 1.5rem;">
+            <!-- Personal Info Form -->
+            <div class="card">
+              <div class="card__header">
+                <h2 class="card__title"><i class="fa-solid fa-id-card"></i> Personal & Work Information</h2>
+              </div>
+              <div class="card__body">
+                <form id="profileForm" data-validate>
+                  <div class="grid grid-cols-2">
+                    <div class="form-group">
+                      <label class="form-label">Full Name</label>
+                      <input type="text" class="form-control" value="Alexander Wright" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Work Email</label>
+                      <input type="email" class="form-control" value="alexander@worknest.io" required>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-2">
+                    <div class="form-group">
+                      <label class="form-label">Phone Number</label>
+                      <input type="text" class="form-control" value="+1 (555) 234-5678">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Location / Office</label>
+                      <input type="text" class="form-control" value="New York HQ (Hybrid)">
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn--primary"><i class="fa-solid fa-floppy-disk"></i> Update Profile Details</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Change Password Form -->
+            <div class="card">
+              <div class="card__header">
+                <h2 class="card__title"><i class="fa-solid fa-shield-keyhole"></i> Change Password</h2>
+              </div>
+              <div class="card__body">
+                <form id="pwForm" data-validate>
+                  <div class="form-group">
+                    <label class="form-label">Current Password</label>
+                    <input type="password" class="form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required>
+                  </div>
+                  <div class="grid grid-cols-2">
+                    <div class="form-group">
+                      <label class="form-label">New Password</label>
+                      <input type="password" class="form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Confirm New Password</label>
+                      <input type="password" class="form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn--secondary"><i class="fa-solid fa-key"></i> Update Security Password</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <footer class="footer">
+        WorkNest Account Settings &copy; 2026.
+      </footer>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    document.getElementById('profileForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Profile information updated successfully.', 'success');
+    });
+
+    document.getElementById('pwForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Account password updated cleanly.', 'success');
+    });
+  </script>
+</body>
+</html>

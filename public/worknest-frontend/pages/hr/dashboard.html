@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - HR Dashboard</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">WN</div>
+        <div>
+          <h1 class="sidebar__title">WorkNest</h1>
+          <span class="sidebar__role-pill">HR Console</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-title">Human Resources</div>
+        <a href="dashboard.html" class="sidebar__link is-active">
+          <i class="fa-solid fa-users-view-finder"></i> HR Overview
+        </a>
+        <a href="employees.html" class="sidebar__link">
+          <i class="fa-solid fa-address-book"></i> Employee Directory
+        </a>
+        <a href="../admin/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-user-shield"></i> Admin Panel
+        </a>
+        <a href="../manager/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-user-group"></i> Manager Portal
+        </a>
+        <a href="../employee/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-house-user"></i> Employee Portal
+        </a>
+
+        <div class="sidebar__section-title" style="margin-top: 1rem;">System & Utils</div>
+        <a href="../shared/profile.html" class="sidebar__link">
+          <i class="fa-solid fa-user-gear"></i> Account Settings
+        </a>
+        <a href="../../components-guide.html" class="sidebar__link">
+          <i class="fa-solid fa-swatchbook"></i> Style Guide
+        </a>
+        <a href="../../index.html" class="sidebar__link" style="color: var(--ivory);">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+            <input type="text" class="search-box__input" placeholder="Search leave requests, attendance logs...">
+          </div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="role-switcher">
+            <span class="role-switcher__label">Role:</span>
+            <select id="roleSelect" class="role-switcher__select">
+              <option value="admin">Admin</option>
+              <option value="ceo">CEO</option>
+              <option value="hr" selected>HR</option>
+              <option value="manager">Manager</option>
+              <option value="employee">Employee</option>
+              <option value="support">Support</option>
+            </select>
+          </div>
+
+          <div class="user-dropdown dropdown">
+            <button class="user-btn dropdown-toggle">
+              <div class="avatar"><span>SL</span></div>
+              <div class="user-info">
+                <div class="user-name">Sarah Lindqvist</div>
+                <div class="user-role">Head of People & HR</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>HR & Workforce Management</h1>
+            <p>Attendance oversight, leave request approvals, and employee lifecycle monitoring.</p>
+          </div>
+          <div class="page-header__actions">
+            <a href="employees.html" class="btn btn--outline"><i class="fa-solid fa-list"></i> View Directory</a>
+            <button class="btn btn--primary" data-modal-target="addEmployeeModal"><i class="fa-solid fa-user-plus"></i> Add Employee</button>
+          </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Total Employees</div>
+              <div class="stat-value">248</div>
+              <div class="stat-trend stat-trend--up"><i class="fa-solid fa-arrow-up"></i> 100% Onboarded</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-address-card"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Present Today</div>
+              <div class="stat-value">234 / 248</div>
+              <div class="stat-trend stat-trend--up"><i class="fa-solid fa-user-check"></i> 94.3% Attendance</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">On Leave Today</div>
+              <div class="stat-value">9 Staff</div>
+              <div class="stat-trend stat-trend--down"><i class="fa-solid fa-plane-departure"></i> 5 Approved</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-calendar-minus"></i></div>
+          </div>
+
+          <div class="card card--stat">
+            <div class="stat-content">
+              <div class="stat-label">Pending Leave Queue</div>
+              <div class="stat-value">5 Requests</div>
+              <div class="stat-trend stat-trend--down" style="color: var(--status-pending-text);"><i class="fa-solid fa-hourglass-half"></i> Action Required</div>
+            </div>
+            <div class="stat-icon"><i class="fa-solid fa-file-circle-exclamation"></i></div>
+          </div>
+        </div>
+
+        <!-- Leave Requests Queue & Attendance Heatmap Grid -->
+        <div class="grid grid-cols-3" style="margin-bottom: 2rem;">
+          <!-- Pending Leave Approvals (Span 2) -->
+          <div class="card" style="grid-column: span 2;">
+            <div class="card__header">
+              <div>
+                <h2 class="card__title"><i class="fa-solid fa-clipboard-check"></i> Pending Leave Approvals Queue</h2>
+                <div class="card__subtitle">Review and decide employee leave applications</div>
+              </div>
+              <span class="badge badge--pending">5 Awaiting Action</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table--hover">
+                <thead>
+                  <tr>
+                    <th>Employee</th>
+                    <th>Leave Type</th>
+                    <th>Duration</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="hrLeaveRow1">
+                    <td>
+                      <div style="display:flex; align-items:center; gap: 0.75rem;">
+                        <div class="avatar avatar--sm">DK</div>
+                        <div>
+                          <strong>David Kim</strong>
+                          <div style="font-size: 0.75rem; color: var(--text-muted);">Engineering</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Annual Leave</td>
+                    <td>Aug 14 – Aug 18 (5 Days)</td>
+                    <td style="font-size: 0.8125rem;">Family vacation trip</td>
+                    <td><span class="badge badge--pending">Pending</span></td>
+                    <td>
+                      <div style="display:flex; gap: 0.375rem;">
+                        <button class="btn btn--primary btn--sm" onclick="approveLeave('hrLeaveRow1')"><i class="fa-solid fa-check"></i> Approve</button>
+                        <button class="btn btn--danger btn--sm" onclick="rejectLeave('hrLeaveRow1')"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr id="hrLeaveRow2">
+                    <td>
+                      <div style="display:flex; align-items:center; gap: 0.75rem;">
+                        <div class="avatar avatar--sm">MC</div>
+                        <div>
+                          <strong>Maria Chen</strong>
+                          <div style="font-size: 0.75rem; color: var(--text-muted);">Product & Design</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Sick Leave</td>
+                    <td>Aug 11 (1 Day)</td>
+                    <td style="font-size: 0.8125rem;">Medical appointment & fever</td>
+                    <td><span class="badge badge--pending">Pending</span></td>
+                    <td>
+                      <div style="display:flex; gap: 0.375rem;">
+                        <button class="btn btn--primary btn--sm" onclick="approveLeave('hrLeaveRow2')"><i class="fa-solid fa-check"></i> Approve</button>
+                        <button class="btn btn--danger btn--sm" onclick="rejectLeave('hrLeaveRow2')"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr id="hrLeaveRow3">
+                    <td>
+                      <div style="display:flex; align-items:center; gap: 0.75rem;">
+                        <div class="avatar avatar--sm">JT</div>
+                        <div>
+                          <strong>James Taylor</strong>
+                          <div style="font-size: 0.75rem; color: var(--text-muted);">Sales & Marketing</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Casual Leave</td>
+                    <td>Aug 20 (1 Day)</td>
+                    <td style="font-size: 0.8125rem;">Personal errands</td>
+                    <td><span class="badge badge--pending">Pending</span></td>
+                    <td>
+                      <div style="display:flex; gap: 0.375rem;">
+                        <button class="btn btn--primary btn--sm" onclick="approveLeave('hrLeaveRow3')"><i class="fa-solid fa-check"></i> Approve</button>
+                        <button class="btn btn--danger btn--sm" onclick="rejectLeave('hrLeaveRow3')"><i class="fa-solid fa-xmark"></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Attendance Overview Calendar Matrix -->
+          <div class="card">
+            <div class="card__header">
+              <h2 class="card__title"><i class="fa-solid fa-calendar-days"></i> August Attendance Heatmap</h2>
+            </div>
+            <div class="card__body">
+              <div style="font-size: 0.8125rem; font-weight: 700; color: var(--dark-purple); margin-bottom: 0.75rem; display:flex; justify-between;">
+                <span>August 2026</span>
+                <span style="color: var(--text-muted);">22 Work Days</span>
+              </div>
+
+              <!-- Calendar Grid Matrix -->
+              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 0.75rem;">
+                <div style="font-weight: 700; color: var(--muted-purple);">M</div>
+                <div style="font-weight: 700; color: var(--muted-purple);">T</div>
+                <div style="font-weight: 700; color: var(--muted-purple);">W</div>
+                <div style="font-weight: 700; color: var(--muted-purple);">T</div>
+                <div style="font-weight: 700; color: var(--muted-purple);">F</div>
+                <div style="font-weight: 700; color: var(--muted-purple);">S</div>
+                <div style="font-weight: 700; color: var(--muted-purple);">S</div>
+
+                <!-- Days -->
+                <div style="padding: 6px; background: rgba(39,93,56,0.15); border-radius: 4px;">1</div>
+                <div style="padding: 6px; background: rgba(39,93,56,0.15); border-radius: 4px;">2</div>
+                <div style="padding: 6px; background: rgba(39,93,56,0.15); border-radius: 4px;">3</div>
+                <div style="padding: 6px; background: rgba(39,93,56,0.15); border-radius: 4px;">4</div>
+                <div style="padding: 6px; background: rgba(39,93,56,0.15); border-radius: 4px;">5</div>
+                <div style="padding: 6px; background: rgba(209,176,193,0.2); border-radius: 4px;">6</div>
+                <div style="padding: 6px; background: rgba(209,176,193,0.2); border-radius: 4px;">7</div>
+
+                <div style="padding: 6px; background: rgba(39,93,56,0.15); border-radius: 4px;">8</div>
+                <div style="padding: 6px; background: var(--dark-purple); color: var(--ivory); font-weight: 800; border-radius: 4px;">9</div>
+                <div style="padding: 6px; background: rgba(209,176,193,0.1); border-radius: 4px;">10</div>
+                <div style="padding: 6px; background: rgba(209,176,193,0.1); border-radius: 4px;">11</div>
+                <div style="padding: 6px; background: rgba(209,176,193,0.1); border-radius: 4px;">12</div>
+                <div style="padding: 6px; background: rgba(209,176,193,0.2); border-radius: 4px;">13</div>
+                <div style="padding: 6px; background: rgba(209,176,193,0.2); border-radius: 4px;">14</div>
+              </div>
+
+              <div style="margin-top: 1.25rem; font-size: 0.75rem; display:flex; gap: 1rem; flex-wrap: wrap;">
+                <span style="display:flex; align-items:center; gap: 4px;"><span style="width: 10px; height: 10px; background: rgba(39,93,56,0.3); border-radius: 2px;"></span> &gt;95% Present</span>
+                <span style="display:flex; align-items:center; gap: 4px;"><span style="width: 10px; height: 10px; background: var(--dark-purple); border-radius: 2px;"></span> Today</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <footer class="footer">
+        WorkNest HR Management Console &copy; 2026.
+      </footer>
+    </div>
+  </div>
+
+  <!-- Add Employee Modal Partial -->
+  <div class="modal-backdrop" id="addEmployeeModal">
+    <div class="modal" style="max-width: 600px;">
+      <div class="modal__header">
+        <h3 class="card__title">Add New Employee Profile</h3>
+        <button class="modal__close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal__body">
+        <form id="addEmpForm" data-validate>
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-control" placeholder="e.g. Jonathan" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-control" placeholder="e.g. Miller" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Work Email</label>
+            <input type="email" class="form-control" placeholder="j.miller@worknest.io" required>
+          </div>
+
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label">Department</label>
+              <select class="form-select" required>
+                <option>Engineering</option>
+                <option>Human Resources</option>
+                <option>Product & Design</option>
+                <option>Sales & Marketing</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Job Title / Role</label>
+              <input type="text" class="form-control" placeholder="Senior Backend Developer" required>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label">Joining Date</label>
+              <input type="date" class="form-control" value="2026-08-15" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Reporting Manager</label>
+              <select class="form-select">
+                <option>Marcus Vance (Engineering)</option>
+                <option>Sarah Lindqvist (HR)</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--outline" data-modal-close>Cancel</button>
+        <button class="btn btn--primary" onclick="showToast('New employee added successfully!', 'success'); document.getElementById('addEmployeeModal').classList.remove('is-active');">Save & Invite Employee</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    function approveLeave(rowId) {
+      const row = document.getElementById(rowId);
+      if (row) {
+        row.querySelector('.badge').className = 'badge badge--success';
+        row.querySelector('.badge').textContent = 'Approved';
+        row.querySelector('td:last-child').innerHTML = '<span class="badge badge--success"><i class="fa-solid fa-check"></i> Done</span>';
+        showToast('Leave request approved.', 'success');
+      }
+    }
+
+    function rejectLeave(rowId) {
+      const row = document.getElementById(rowId);
+      if (row) {
+        row.querySelector('.badge').className = 'badge badge--danger';
+        row.querySelector('.badge').textContent = 'Rejected';
+        row.querySelector('td:last-child').innerHTML = '<span class="badge badge--danger"><i class="fa-solid fa-xmark"></i> Rejected</span>';
+        showToast('Leave request rejected.', 'info');
+      }
+    }
+  </script>
+</body>
+</html>

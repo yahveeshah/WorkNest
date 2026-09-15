@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorkNest - Task Board (Kanban)</title>
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .kanban-board {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .kanban-board {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .kanban-column {
+      background-color: rgba(209, 176, 193, 0.12);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      min-height: 550px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .kanban-column__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .kanban-column__title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--dark-purple);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .kanban-column__count {
+      width: 22px;
+      height: 22px;
+      background-color: var(--dark-purple);
+      color: var(--ivory);
+      border-radius: 50%;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .kanban-column__body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+    }
+
+    .kanban-column__body.is-drag-over {
+      background-color: rgba(255, 240, 196, 0.3);
+      border-radius: var(--radius-md);
+    }
+
+    .kanban-card {
+      background-color: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      cursor: grab;
+      transition: var(--transition);
+    }
+
+    .kanban-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .kanban-card.is-dragging {
+      opacity: 0.4;
+      cursor: grabbing;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <div class="sidebar__logo">WN</div>
+        <div>
+          <h1 class="sidebar__title">WorkNest</h1>
+          <span class="sidebar__role-pill">Manager Hub</span>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <div class="sidebar__section-title">Team Leadership</div>
+        <a href="dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-user-group"></i> My Team Overview
+        </a>
+        <a href="tasks.html" class="sidebar__link is-active">
+          <i class="fa-solid fa-list-check"></i> Kanban Task Board
+        </a>
+        <a href="../employee/dashboard.html" class="sidebar__link">
+          <i class="fa-solid fa-house-user"></i> My Portal
+        </a>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__toggle" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-box__icon"></i>
+            <input type="text" class="search-box__input" placeholder="Search tasks, tags, assignees...">
+          </div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="role-switcher">
+            <span class="role-switcher__label">Role:</span>
+            <select id="roleSelect" class="role-switcher__select">
+              <option value="admin">Admin</option>
+              <option value="ceo">CEO</option>
+              <option value="hr">HR</option>
+              <option value="manager" selected>Manager</option>
+              <option value="employee">Employee</option>
+              <option value="support">Support</option>
+            </select>
+          </div>
+
+          <div class="user-dropdown dropdown">
+            <button class="user-btn dropdown-toggle">
+              <div class="avatar"><span>MV</span></div>
+              <div class="user-info">
+                <div class="user-name">Marcus Vance</div>
+                <div class="user-role">Engineering Lead</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="page-header">
+          <div>
+            <h1>Interactive Kanban Task Board</h1>
+            <p>Drag and drop cards to reassign status. Track sprint deliverables in real-time.</p>
+          </div>
+          <div class="page-header__actions">
+            <button class="btn btn--primary" data-modal-target="createTaskModal"><i class="fa-solid fa-plus"></i> Create Task</button>
+          </div>
+        </div>
+
+        <!-- Kanban Board -->
+        <div class="kanban-board">
+          <!-- Column 1: To Do -->
+          <div class="kanban-column">
+            <div class="kanban-column__header">
+              <span class="kanban-column__title"><i class="fa-solid fa-circle-notch" style="color: var(--muted-purple);"></i> To Do</span>
+              <span class="kanban-column__count">2</span>
+            </div>
+            <div class="kanban-column__body">
+              <div class="kanban-card" id="task1">
+                <div style="display:flex; justify-between; align-items:center; margin-bottom: 0.5rem;">
+                  <span class="badge badge--danger">High Priority</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> Aug 16</span>
+                </div>
+                <strong style="font-size: 0.9375rem; display:block; color: var(--dark-purple);">Refactor OAuth Tokens API</strong>
+                <p style="font-size: 0.8125rem; margin-top: 0.25rem;">Upgrade authorization middleware to JWT v3 protocol.</p>
+                <div style="margin-top: 0.875rem; display:flex; justify-between; align-items:center;">
+                  <div class="avatar avatar--sm">DK</div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">David Kim</span>
+                </div>
+              </div>
+
+              <div class="kanban-card" id="task2">
+                <div style="display:flex; justify-between; align-items:center; margin-bottom: 0.5rem;">
+                  <span class="badge badge--info">Feature</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> Aug 18</span>
+                </div>
+                <strong style="font-size: 0.9375rem; display:block; color: var(--dark-purple);">Dark Mode CSS Variables</strong>
+                <p style="font-size: 0.8125rem; margin-top: 0.25rem;">Extract CSS root variables for user color preferences.</p>
+                <div style="margin-top: 0.875rem; display:flex; justify-between; align-items:center;">
+                  <div class="avatar avatar--sm">RA</div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Rachel Adams</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: In Progress -->
+          <div class="kanban-column">
+            <div class="kanban-column__header">
+              <span class="kanban-column__title"><i class="fa-solid fa-spinner" style="color: var(--muted-purple);"></i> In Progress</span>
+              <span class="kanban-column__count">2</span>
+            </div>
+            <div class="kanban-column__body">
+              <div class="kanban-card" id="task3">
+                <div style="display:flex; justify-between; align-items:center; margin-bottom: 0.5rem;">
+                  <span class="badge badge--pending">Sprint 14</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> Aug 12</span>
+                </div>
+                <strong style="font-size: 0.9375rem; display:block; color: var(--dark-purple);">Laravel Blade Layout Migration</strong>
+                <p style="font-size: 0.8125rem; margin-top: 0.25rem;">Convert static HTML pages into modular Blade partial templates.</p>
+                <div style="margin-top: 0.875rem; display:flex; justify-between; align-items:center;">
+                  <div class="avatar avatar--sm">JT</div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">James Taylor</span>
+                </div>
+              </div>
+
+              <div class="kanban-card" id="task4">
+                <div style="display:flex; justify-between; align-items:center; margin-bottom: 0.5rem;">
+                  <span class="badge badge--danger">Urgent Fix</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> Today</span>
+                </div>
+                <strong style="font-size: 0.9375rem; display:block; color: var(--dark-purple);">Fix MySQL Index Deadlock</strong>
+                <p style="font-size: 0.8125rem; margin-top: 0.25rem;">Optimize composite keys on audit log table query.</p>
+                <div style="margin-top: 0.875rem; display:flex; justify-between; align-items:center;">
+                  <div class="avatar avatar--sm">DK</div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">David Kim</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Under Review -->
+          <div class="kanban-column">
+            <div class="kanban-column__header">
+              <span class="kanban-column__title"><i class="fa-solid fa-eye" style="color: var(--muted-purple);"></i> Under Review</span>
+              <span class="kanban-column__count">1</span>
+            </div>
+            <div class="kanban-column__body">
+              <div class="kanban-card" id="task5">
+                <div style="display:flex; justify-between; align-items:center; margin-bottom: 0.5rem;">
+                  <span class="badge badge--info">QA Review</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> Aug 10</span>
+                </div>
+                <strong style="font-size: 0.9375rem; display:block; color: var(--dark-purple);">PDF Export Engine</strong>
+                <p style="font-size: 0.8125rem; margin-top: 0.25rem;">Integrate Dompdf export for executive reports.</p>
+                <div style="margin-top: 0.875rem; display:flex; justify-between; align-items:center;">
+                  <div class="avatar avatar--sm">MC</div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Maria Chen</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 4: Done -->
+          <div class="kanban-column">
+            <div class="kanban-column__header">
+              <span class="kanban-column__title"><i class="fa-solid fa-circle-check" style="color: var(--status-success-text);"></i> Done</span>
+              <span class="kanban-column__count">1</span>
+            </div>
+            <div class="kanban-column__body">
+              <div class="kanban-card" id="task6">
+                <div style="display:flex; justify-between; align-items:center; margin-bottom: 0.5rem;">
+                  <span class="badge badge--success">Completed</span>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);"><i class="fa-regular fa-clock"></i> Aug 08</span>
+                </div>
+                <strong style="font-size: 0.9375rem; display:block; color: var(--dark-purple);">Setup Base CSS Theme Tokens</strong>
+                <p style="font-size: 0.8125rem; margin-top: 0.25rem;">Configured 5 strict brand color variables in theme.css.</p>
+                <div style="margin-top: 0.875rem; display:flex; justify-between; align-items:center;">
+                  <div class="avatar avatar--sm">RA</div>
+                  <span style="font-size: 0.75rem; color: var(--text-muted);">Rachel Adams</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <footer class="footer">
+        WorkNest Kanban Task Manager &copy; 2026.
+      </footer>
+    </div>
+  </div>
+
+  <!-- Create Task Modal -->
+  <div class="modal-backdrop" id="createTaskModal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="card__title">Assign New Team Task</h3>
+        <button class="modal__close" data-modal-close>&times;</button>
+      </div>
+      <div class="modal__body">
+        <form id="newTaskForm" data-validate>
+          <div class="form-group">
+            <label class="form-label">Task Title</label>
+            <input type="text" class="form-control" placeholder="e.g. Implement Attendance Ring Widget" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" rows="3" placeholder="Provide clear task scope and requirements..."></textarea>
+          </div>
+          <div class="grid grid-cols-2">
+            <div class="form-group">
+              <label class="form-label">Assignee</label>
+              <select class="form-select" required>
+                <option>David Kim (Frontend)</option>
+                <option>Rachel Adams (Full-Stack)</option>
+                <option>James Taylor (DevOps)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Priority Tag</label>
+              <select class="form-select">
+                <option>High Priority</option>
+                <option selected>Normal</option>
+                <option>Low Priority</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--outline" data-modal-close>Cancel</button>
+        <button class="btn btn--primary" onclick="showToast('New task assigned successfully!', 'success'); document.getElementById('createTaskModal').classList.remove('is-active');">Create Task</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/kanban.js"></script>
+</body>
+</html>
