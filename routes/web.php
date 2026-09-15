@@ -43,6 +43,14 @@ Route::middleware('auth')->group(function () {
     // Role dashboard routes
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::put('/admin/organization/name', [AdminController::class, 'updateOrganizationName'])->name('admin.organization.update-name');
+        Route::put('/admin/users/{targetUser}/role', [AdminController::class, 'updateUserRole'])->name('admin.users.update-role');
+        Route::put('/admin/users/{targetUser}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('admin.users.toggle-status');
+        Route::post('/admin/carousel/slides', [AdminController::class, 'storeSlide'])->name('admin.carousel.store');
+        Route::put('/admin/carousel/slides/{slide}', [AdminController::class, 'updateSlide'])->name('admin.carousel.update-slide');
+        Route::delete('/admin/carousel/slides/{slide}', [AdminController::class, 'destroySlide'])->name('admin.carousel.destroy-slide');
+        Route::post('/admin/nests', [AdminController::class, 'createNest'])->name('admin.nests.create');
+
         Route::get('/admin/carousel', [CarouselSlideController::class, 'edit'])->name('admin.carousel.edit');
         Route::put('/admin/carousel', [CarouselSlideController::class, 'update'])->name('admin.carousel.update');
         Route::post('/admin/organization/delete', [AdminController::class, 'deleteOrganization'])->name('admin.organization.delete');
