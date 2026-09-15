@@ -1,0 +1,1 @@
+@include('partials.dashboard',['department'=>'Developer','route'=>'developer.dashboard','heading'=>'Development workspace','description'=>'Access the development information, assignments, and technical work relevant to your department.'])

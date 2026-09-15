@@ -1,0 +1,1 @@
+@include('partials.dashboard',['department'=>'Finance','route'=>'finance.dashboard','heading'=>'Finance workspace','description'=>'Review financial operations, payroll coordination, and organization records assigned to the finance team.'])
